@@ -1,0 +1,210 @@
+/* Global reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* Layout */
+header {
+  background: #111827;
+  color: #f9fafb;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header nav a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem 3rem;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.25);
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  gap: 0.3rem;
+  flex: 1 1 250px;
+}
+
+input[type="url"],
+input[type="text"],
+input[type="search"],
+input[type="submit"],
+button {
+  font: inherit;
+}
+
+input[type="url"],
+input[type="text"],
+input[type="search"] {
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  outline: none;
+  min-width: 0;
+}
+
+input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px #4f46e5;
+}
+
+/* Buttons */
+button,
+input[type="submit"] {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: #4f46e5;
+  color: #f9fafb;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: #4338ca;
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: default;
+}
+
+/* Messages */
+#form-message {
+  flex-basis: 100%;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+#form-message.success {
+  color: #16a34a;
+}
+
+#form-message.error {
+  color: #dc2626;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+th {
+  text-align: left;
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+tbody tr:hover {
+  background: #f3f4f6;
+}
+
+.truncate {
+  display: inline-block;
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy-btn {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  main {
+    margin-top: 1rem;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .truncate {
+    max-width: 100%;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .truncate {
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+}

@@ -1,0 +1,127 @@
+<% layout('layout') %>
+
+<div class="row g-4">
+  <!-- Create link card -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Create a new short link</h5>
+      </div>
+      <div class="card-body">
+        <form id="create-form" class="d-flex flex-column gap-3">
+
+          <div>
+            <label for="url" class="form-label fw-semibold">Long URL</label>
+            <input type="url" class="form-control" id="url" name="url" required />
+          </div>
+
+          <div>
+            <label for="code" class="form-label fw-semibold">
+              Custom code (optional)
+            </label>
+            <input type="text" class="form-control" id="code" name="code" minlength="6" maxlength="8" />
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary w-100">
+            Create
+          </button>
+
+          <p id="form-message" class="mt-1 mb-0 small"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Links list -->
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">All links</h5>
+        <span class="badge bg-secondary"><%= links.length %> total</span>
+      </div>
+
+      <div class="card-body">
+
+        <!-- Search -->
+        <form method="GET" action="/" class="row g-2 mb-3">
+          <div class="col-9">
+            <input type="text" name="q" value="<%= search %>" class="form-control" placeholder="Search" />
+          </div>
+          <div class="col-3">
+            <button class="btn btn-outline-secondary w-100">Search</button>
+          </div>
+        </form>
+
+        <% if (!links.length) { %>
+          <div class="alert alert-info mb-0">No links yet.</div>
+        <% } else { %>
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>URL</th>
+                  <th>Clicks</th>
+                  <th>Last clicked</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% links.forEach(link => { %>
+                  <tr>
+                    <td>
+                      <a href="/code/<%= link.code %>"><%= link.code %></a>
+                    </td>
+
+                    <td class="truncate"><%= link.target_url %></td>
+
+                    <td><%= link.total_clicks %></td>
+
+                    <td>
+                      <%= link.last_clicked_at
+                        ? link.last_clicked_at.toISOString().slice(0,19).replace('T',' ')
+                        : '-' %>
+                    </td>
+
+                    <td class="text-end">
+                      <button class="btn btn-sm btn-danger delete-btn" data-code="<%= link.code %>">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Delete link</h5>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Are you sure you want to delete
+        <span class="fw-bold" id="deleteCodeText"></span>?
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<% layout('layout') %>
+
+<section class="card p-3">
+  <h2>Stats for <%= link.code %></h2>
+
+  <p><strong>Short URL:</strong> <%= process.env.BASE_URL %>/<%= link.code %></p>
+
+  <p>
+    <strong>Target URL:</strong>
+    <a href="<%= link.target_url %>" target="_blank"><%= link.target_url %></a>
+  </p>
+
+  <p><strong>Total clicks:</strong> <%= link.total_clicks %></p>
+
+  <p>
+    <strong>Last clicked:</strong>
+    <%= link.last_clicked_at ? link.last_clicked_at.toISOString().slice(0,19).replace('T',' ') : '-' %>
+  </p>
+</section>
